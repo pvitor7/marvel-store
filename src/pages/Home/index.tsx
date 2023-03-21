@@ -1,6 +1,6 @@
 import * as S from './styled'; 
 import Header from '../../components/Header';
-import * as a from '../../server';
+import marvelApi from '../../server';
 import { useEffect, useState } from 'react';
 
 
@@ -9,20 +9,29 @@ function Home() {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    a.marvelApi
-    .get("comics")
-      .then((response: any) =>     setList(response.data.data.results))
-      .catch(function (error: any) {
-        console.log("Erro ao fazer solicitação para a API da Marvel:", error);
-      });
+    marvelApi
+    .get("series")
+      .then((response: any) =>  setList(response.data.data.results))
+      
   }, []);
 
-  console.log(list)
 
   return (
     <S.HomePageStyled>
       <Header/>
-        <h2>Lista h2</h2>
+
+        <h2>Comics</h2>
+        <S.UlComics>
+          {list.map((comic: any, index) => {
+              return(
+                <S.LiComic>
+                  <img src={`${comic.thumbnail.path}.${comic.thumbnail.extension}`} alt={comic.title} />
+                  <h3>{comic.title}</h3>
+                </S.LiComic>
+              )
+          })}
+        
+        </S.UlComics>
       <ul>
       
       
