@@ -8,7 +8,6 @@ const private_key = "9ec5c5e4b7eca4a2e352455d1001595db9511a64";
 const TIMESTAMP = new Date().getTime();
 const HASH = md5(`${TIMESTAMP}${private_key}${public_key}`).toString();
 
-// Cria uma instância do Axios com as configurações padrão da Marvel API
 const marvelApi = axios.create({
   baseURL: "https://gateway.marvel.com/v1/public/",
   params: {
@@ -17,7 +16,5 @@ const marvelApi = axios.create({
     hash: HASH,
   },
 });
-
-console.log(public_key, TIMESTAMP, HASH,)
 
 export { marvelApi, TIMESTAMP, public_key, private_key, HASH};
