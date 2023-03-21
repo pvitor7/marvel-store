@@ -4,7 +4,7 @@ const Header = () => {
     return (
         <S.HeaderStyled>
             <h1>
-                Teste
+                Marvel Store
             </h1>
 
         </S.HeaderStyled>
