@@ -17,4 +17,4 @@ const marvelApi = axios.create({
   },
 });
 
-export { marvelApi, TIMESTAMP, public_key, private_key, HASH};
+export default marvelApi;
