@@ -7,6 +7,17 @@ export const HomePageStyled = styled.body`
         width: 100vw;
         color: var(--color-white-fixed);
     }
+
+    h2{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 17px;
+        height: 50px;
+        width: 100%;
+        background: green;
+    }
+
     `
 
 export const UlComics = styled.ul`

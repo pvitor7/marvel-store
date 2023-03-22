@@ -1,4 +1,4 @@
-import * as S from './styled'; 
+import * as S from './styled';
 import Header from '../../components/Header';
 import marvelApi from '../../server';
 import { useEffect, useState } from 'react';
@@ -9,32 +9,49 @@ import Card from '../../components/Card';
 function Home() {
 
   const [list, setList] = useState([]);
-  const [comicId, setComicId] = useState(0);
+  const [listMagazines, setListMagazines] = useState([]);
 
-  const history = useHistory();
+
 
   useEffect(() => {
-    marvelApi
-    .get("series")
-      .then((response: any) =>  setList(response.data.data.results))
+
+    async function fetchData() {
+      try {
+        const response = await marvelApi.get("series");
+        const series = response.data.data.results;
+        setList(series);
+  
+        const promises = series.map((comic) =>
+          marvelApi.get(`/series/${comic.id}/comics`).then((response) => response.data.data.results)
+        );
+  
+        const magazines = await Promise.all(promises);
+        setListMagazines(magazines.flat());
+      } catch (error) {
+        console.log("Erro: ", error);
+      }
+    }
+    fetchData();
   }, []);
 
 
   return (
-    <S.HomePageStyled>
-      <Header/>
+    <>
+      <Header />
+      <S.HomePageStyled>
 
         <h2>Comics (Séries)</h2>
         <S.UlComics>
-          {list.map((comic: any, index) => <Card comic={comic} key={index}/>
+          {listMagazines.map((comic: any, index: any) => <Card comic={comic} key={index} />
           )}
         </S.UlComics>
-      <ul>
-      
-      
-      </ul>
-    </S.HomePageStyled>
-    
+        <ul>
+
+
+        </ul>
+      </S.HomePageStyled>
+    </>
+
   )
 }
 
