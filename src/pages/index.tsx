@@ -10,7 +10,6 @@ function Routes() {
          <Route exact path="/" component={Home}/>
          <Route path="/comic/:id" component={ComicPage}/>
      </Switch>
-      
     )
   }
 
