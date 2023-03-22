@@ -1,13 +1,15 @@
-import * as S from './styled'
+import * as S from './styled';
+import Logo from '../../../public/marvel-comics-logo.png';
+import { BsFillCartFill } from 'react-icons/bs'
 
 const Header = () => {
     return (
         <S.HeaderStyled>
-            <h1>
-                Marvel Store
-            </h1>
-
+                <img src={Logo} alt="" />
+                <BsFillCartFill className='icon-cart'/>
         </S.HeaderStyled>
+
+
     )
 }
 
