@@ -8,40 +8,51 @@ import Card from '../../components/Card';
 
 function ComicPage() {
 
-  const [listSerieComic, setListSerieComic] = useState([]);
   const { id }: any = useParams();
+  const [comic, setComic] = useState();
+
 
   useEffect(() => {
     marvelApi
-      .get(`/series/${id}/comics`)
-      .then((response) => {
-        console.log(response.data.data.results)
-        setListSerieComic(response.data.data.results)
-      })
-
+      .get(`comics/${id}`)
+      .then((response) => setComic(response.data.data.results[0]))
   }, []);
 
   return (
-    <S.ComicPage>
+    <>
       <Header />
+      <S.ComicPage>
 
-      <section>
+        <S.Comic>
+          <h2>{comic?.title}</h2>
 
-        <S.Galery>
+          <img src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`} alt={comic?.title} />
 
-          <S.UlComics>
-            {listSerieComic.map((comic: any, index) => <Card comic={comic} key={index}/>
-              ).reverse()
-            }
-          </S.UlComics>
+          <S.DivPrice>
+            {
+            comic?.prices.map((price: any) =>
+              <S.Price>
+                {price.type === "printPrice" ? "Impressa: " : "Digital: "}
+                $ {price.price} 
+                </S.Price>
+            )}
+        
+          </S.DivPrice>
+          
+            {comic?.creators.items.map((creator: any) => <p> <span>{creator.role}: </span>{creator.name}</p>
+            )}
+          
+          <p> <span>Páginas:</span> {comic?.pageCount}</p>
 
-        </S.Galery>
+          <S.DescriptionComic> 
+            <span>Descrição:</span> 
+            {comic?.description}
+          </S.DescriptionComic>
 
+        </S.Comic>
+      </S.ComicPage>
 
-
-      </section>
-    </S.ComicPage>
-
+    </>
   )
 }
 

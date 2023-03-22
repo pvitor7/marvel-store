@@ -8,22 +8,19 @@ import Card from '../../components/Card';
 
 function Home() {
 
-  const [list, setList] = useState([]);
   const [listMagazines, setListMagazines] = useState([]);
-
-
 
   useEffect(() => {
 
-    async function fetchData() {
+    async function fetchComics() {
       try {
         const response = await marvelApi.get("series");
         const series = response.data.data.results;
-        setList(series);
-  
+        
         const promises = series.map((comic) =>
           marvelApi.get(`/series/${comic.id}/comics`).then((response) => response.data.data.results)
-        );
+          
+          );
   
         const magazines = await Promise.all(promises);
         setListMagazines(magazines.flat());
@@ -31,7 +28,7 @@ function Home() {
         console.log("Erro: ", error);
       }
     }
-    fetchData();
+    fetchComics();
   }, []);
 
 
