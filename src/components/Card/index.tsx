@@ -24,7 +24,9 @@ const history = useHistory();
               <h3>{comic.title}</h3>
 
               <S.DivPrice>
-                      {comic.prices?.map((price) => <S.Price htmlFor="">{price.price} </S.Price>
+                      {comic.prices?.map((price: any) => 
+                      <S.Price htmlFor="">{price.type === "printPrice" ? "Impressa: " :  "Digital: " } $ {price.price} </S.Price>
+                    
                       )}
             </S.DivPrice>
         </S.CardStyled>

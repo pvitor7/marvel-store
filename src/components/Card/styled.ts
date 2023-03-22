@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
 export const CardStyled = styled.div`
-  width: 200px;
-    /* height: 320px; */
+    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,16 +32,18 @@ export const CardStyled = styled.div`
 export const DivPrice = styled.div`
     
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     height: 50px;
+    gap: 10px;
 
 `
 
 export const Price = styled.label`
-    padding: 10px;
-    background: #000000;
+    padding: 5px;
+    width: 80%;
+    border: solid 1px #000000;
     color: var(--color-white-fixed)
 
 `
