@@ -9,6 +9,7 @@ export const ComicPage = styled.body`
         color: var(--color-white-fixed);
         gap: 50px;
         padding: 50px 0px;
+        top: 80px;
         
 
         section{

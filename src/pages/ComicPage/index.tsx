@@ -4,6 +4,7 @@ import marvelApi from '../../server';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import Card from '../../components/Card';
+import { addToCart } from '../../utils/cart';
 
 
 function ComicPage() {
@@ -30,22 +31,32 @@ function ComicPage() {
 
           <S.DivPrice>
             {
-            comic?.prices.map((price: any) =>
-              <S.Price>
-                {price.type === "printPrice" ? "Impressa: " : "Digital: "}
-                $ {price.price} 
+              comic?.prices.map((price: any) =>
+                <S.Price
+                  onClick={() => {
+                    addToCart({ 
+                      id: comic.id, 
+                      title: comic.title, 
+                      type: price.type, 
+                      price: price.price, 
+                      img: `${comic.thumbnail.path}.${comic.thumbnail.extension}` 
+                    });
+                  }}
+                >
+                  {price.type === "printPrice" ? "Impressa: " : "Digital: "}
+                  $ {price.price}
                 </S.Price>
-            )}
-        
+              )}
+
           </S.DivPrice>
-          
-            {comic?.creators.items.map((creator: any) => <p> <span>{creator.role}: </span>{creator.name}</p>
-            )}
-          
+
+          {comic?.creators.items.map((creator: any) => <p> <span>{creator.role}: </span>{creator.name}</p>
+          )}
+
           <p> <span>Páginas:</span> {comic?.pageCount}</p>
 
-          <S.DescriptionComic> 
-            <span>Descrição:</span> 
+          <S.DescriptionComic>
+            <span>Descrição:</span>
             {comic?.description}
           </S.DescriptionComic>
 

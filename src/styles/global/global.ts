@@ -9,9 +9,9 @@ const GlobalStyle = createGlobalStyle`
 
   :root{
     --color-white-fixed: #FFFFFF;
-    --color-back-fixed: #000000;
+    --color-black-fixed: #000000;
     --color-gray-1: #dddddd;
-    --color-green1: #5cb85c;
+    --color-green1: #5cb850;
     }
 `
 export default GlobalStyle

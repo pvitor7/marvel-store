@@ -2,7 +2,6 @@ import * as S from './styled';
 import Header from '../../components/Header';
 import marvelApi from '../../server';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import Card from '../../components/Card';
 
 
@@ -47,6 +46,7 @@ function Home() {
 
         </ul>
       </S.HomePageStyled>
+      
     </>
 
   )

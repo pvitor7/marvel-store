@@ -2,8 +2,8 @@ import axios from "axios";
 import md5 from "crypto-js/md5";
 
 
-const public_key = "a9e45dd5f763e17be3b82858f0800f00";
-const private_key = "ba226b1c9f8b9a563d0ed9195d339730f299c352";
+const public_key = "a93afdf852ebe2ee61d4259849044735";
+const private_key = "9ec5c5e4b7eca4a2e352455d1001595db9511a64";
 
 const TIMESTAMP = new Date().getTime();
 const HASH = md5(`${TIMESTAMP}${private_key}${public_key}`).toString();

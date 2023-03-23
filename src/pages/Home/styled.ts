@@ -6,6 +6,8 @@ export const HomePageStyled = styled.body`
         flex-direction: column;
         width: 100vw;
         color: var(--color-white-fixed);
+        top:  80px;
+        position: relative;
     }
 
     h2{
