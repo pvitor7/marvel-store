@@ -47,12 +47,12 @@ const Cart = () => {
                 <S.TrStyled key={item.id}>
                   <td><img src={item.img} alt="" /> </td> 
                   <td>{item.type === "printPrice" ? "Impressa" :  "Digital" }</td>
-                  
-                  <td>{item.price}</td>
-                  <td>{item.quantity}</td>
-                  <td className='add-remove-cart'>
-                    <button onClick={() => handleRemoveFromCart(item)}>-</button>
-                    <button onClick={() => handleAddToCart(item)}>+</button>
+                  <td className='quantity'>
+                    {item.quantity}
+                    <div>
+                      <button onClick={() => handleAddToCart(item)}>+</button>
+                      <button onClick={() => handleRemoveFromCart(item)}>-</button>
+                    </div>
                   </td>
                 </S.TrStyled>
               ))
