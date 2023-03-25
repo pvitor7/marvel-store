@@ -29,6 +29,20 @@ function ComicPage() {
 
           <img src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`} alt={comic?.title} />
 
+        </S.Comic>
+        
+        <S.Comic>
+          {comic?.creators.items.map((creator: any) => <p> <span>{creator.role}: </span>{creator.name}</p>
+          )}
+
+          <p> <span>Páginas:</span> {comic?.pageCount}</p>
+
+          <S.DescriptionComic>
+            <span>Descrição:</span>
+            {comic?.description}
+          </S.DescriptionComic>
+
+
           <S.DivPrice>
             {
               comic?.prices.map((price: any) =>
@@ -50,17 +64,8 @@ function ComicPage() {
 
           </S.DivPrice>
 
-          {comic?.creators.items.map((creator: any) => <p> <span>{creator.role}: </span>{creator.name}</p>
-          )}
-
-          <p> <span>Páginas:</span> {comic?.pageCount}</p>
-
-          <S.DescriptionComic>
-            <span>Descrição:</span>
-            {comic?.description}
-          </S.DescriptionComic>
-
         </S.Comic>
+
       </S.ComicPage>
 
     </>

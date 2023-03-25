@@ -7,7 +7,7 @@ export const CartStyled = styled.div`
         flex-direction: column;
         align-items: center;
         gap: 10px;
-        top: 100px;
+        top: 120px;
         right: 5px;
         width: 85vw;
         max-width: 420px;

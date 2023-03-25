@@ -3,14 +3,25 @@ import styled from 'styled-components';
 export const ComicPage = styled.body`
     @media (min-width: 120px) {
         display: flex;
-        flex-direction: column;
         align-items: center;
+        flex-direction: column;
         width: 100vw;
-        color: var(--color-white-fixed);
-        gap: 50px;
-        padding: 50px 0px;
+        color: var(--color-black-fixed);
+        gap: 30px;
+        padding: 100px 0px;
         top: 80px;
         
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url("../../../public/hqs.jpg");
+            filter: blur(4px);
+            }
 
         section{
             display: flex;
@@ -24,7 +35,8 @@ export const Comic = styled.div`
 
     @media (min-width: 120px) {
         width: calc(100% - 40px);
-        max-width: 620px;
+        max-width: 520px;
+        margin-top: 20px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -34,6 +46,8 @@ export const Comic = styled.div`
         font-size: 18px;
         border: solid 0.5px var(--color-gray-1);
         border-radius: 4px;
+        background:  var(--color-white-fixed);
+        box-shadow: -1px 1px 10px var(--color-black-fixed);
         text-align: initial;
 
         h2{
@@ -49,6 +63,7 @@ export const Comic = styled.div`
             padding: 5px;
             border: solid 0.5px var(--color-gray-1);
             border-radius: 4px;
+            box-shadow: -10px 10px 10px var(--color-gray-2);
         }
 
         span{
@@ -70,6 +85,7 @@ export const Comic = styled.div`
             border: solid 0.1px var(--color-gray-1);
             border-radius: 4px;
             gap: 10px;
+            box-shadow: -1px 1px 1px var(--color-gray-2);
         }
 }
 `
