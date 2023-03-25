@@ -1,3 +1,10 @@
+ 
+export const getCart = () => {
+    const cartItems = localStorage.getItem('cart');
+    return cartItems ? JSON.parse(cartItems) : [];
+}
+
+
 export const addToCart = (comic: any) => {
 
     const cartItems = localStorage.getItem('cart');
@@ -25,7 +32,7 @@ export const addToCart = (comic: any) => {
     }
     console.log('Item adicionado ao carrinho:', comic);
 
-    setTimeout(() => getCart(), 500);
+    getCart();
     
 }
 
@@ -58,10 +65,4 @@ export const removeFromCart = (comic: any) => {
     }
 
     getCart();
-  }
-
-  
-  export const getCart = () => {
-    const cartItems = localStorage.getItem('cart');
-    return cartItems ? JSON.parse(cartItems) : [];
   }

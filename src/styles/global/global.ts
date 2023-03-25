@@ -1,10 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
+import 'typeface-open-sans';
+
+
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    font-family: inherit, sans-serif;
+    font-family: "Open-Sans", sans-serif;
   }
 
   :root{
