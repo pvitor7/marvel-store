@@ -61,6 +61,7 @@ function Home() {
   
 
   useEffect(() => {
+    
     async function fetchComics() {
       try {
         const response = await marvelApi.get("series");
@@ -74,8 +75,7 @@ function Home() {
         setListMagazines(magazines.flat());
         setListPaginate(listMagazines.slice(0, 20));
       } catch (error) {
-        setListMagazines(arrayComics)
-        setListPaginate(listMagazines.slice(0, 20)); 
+        setListPaginate(arrayComics.slice(0, 20)); 
       }
     }
     fetchComics();

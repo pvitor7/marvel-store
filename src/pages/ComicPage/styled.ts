@@ -132,7 +132,7 @@ export const DivPrice = styled.div`
 
 `
 
-export const Price = styled.label`
+export const Price = styled.button`
     padding: 10px;
     font-size: 20px;
     width: 70%;
