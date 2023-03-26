@@ -1,4 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+export const appearFromRight = keyframes`
+  from {
+    opacity: 0; 
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
+
 
 export const CartStyled = styled.div`
 
@@ -17,7 +29,8 @@ export const CartStyled = styled.div`
         position: fixed;
         z-index: 100;
         box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.25);
-
+        animation: ${appearFromRight} 1s;
+        
         
         h2{
             display: flex;
@@ -65,9 +78,24 @@ export const CartStyled = styled.div`
             align-items: center;
             background-color: var(--color-green1);
             color: var(--color-white-fixed);
-            width: 100%;
+            width: 95%;
             height: 50px;
+            border-radius: 5px;
+
+        :hover {
+            transform: scale(1.02);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 0 1px 2px var(--color-green1);
+
         }
+
+
+        :not(:hover) {
+            transform: scale(1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        }
+
 }
 `
 

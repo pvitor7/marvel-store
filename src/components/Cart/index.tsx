@@ -30,6 +30,7 @@ const Cart = () => {
     const total = cartItems.reduce((acc, item: CartItem) => acc + item.price * item.quantity, 0);
   
     return (
+      
       <S.CartStyled id="cart">
         <h2>Carrinho de Compras</h2>
         {cartItems.length === 0 ? (
