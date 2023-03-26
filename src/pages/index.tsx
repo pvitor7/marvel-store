@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
-import Home from "./Home";
-import ComicPage from "./ComicPage";
+import { Home } from "./Home";
+import { ComicPage } from "./ComicPage";
 
 
 function Routes() {

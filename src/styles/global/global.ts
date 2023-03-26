@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
     --color-gray-1: #dddddd;
     --color-gray-2: 	#808080;
     --color-green1: #5cb850;
+    --color-red:  #FF0000;
     }
 `
 export default GlobalStyle

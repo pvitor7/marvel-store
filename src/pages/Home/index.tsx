@@ -1,25 +1,38 @@
 import * as S from './styled';
 import Header from '../../components/Header';
 import marvelApi from '../../server';
-import { useEffect, useState } from 'react';
-import Card from '../../components/Card';
+import { useEffect, useRef, useState } from 'react';
+import { Card } from '../../components/Card';
 import { arrayComics } from '../../utils/arrayComics';
 import { useHistory, useParams } from 'react-router-dom';
 
+export interface RouteParams {
+  page: string;
+  id: string;
+}
 
+interface Card{
+    id: number;
+    title: string;
+    thumbnail: {
+      path: string;
+      extension: string;
+    };
+    prices?: {
+      type: string;
+      price: number;
+    }[];
+}
 
 function Home() {
 
-  const [listMagazines, setListMagazines]: any[] = useState([]);
+  const [listMagazines, setListMagazines] = useState([]);
   const [count, setCount] = useState(1);
   const [listPaginate, setListPaginate] = useState([]);
   const history = useHistory();
-  const { page }: any = useParams();
-
-
+  const { page }: RouteParams = useParams();
 
   const Paginate = (value: number | string) => {
-    
     let start, end;
     const totalItems = listMagazines.length;
     const maxEnd = Math.min(totalItems, 20);
@@ -48,30 +61,37 @@ function Home() {
   
 
   useEffect(() => {
-    // async function fetchComics() {
-    //   try {
-    //     const response = await marvelApi.get("series");
-    //     const series = response.data.data.results;
+    async function fetchComics() {
+      try {
+        const response = await marvelApi.get("series");
+        const series = response.data.data.results;
         
-    //     const promises = series.map((comic) =>
-    //       marvelApi.get(`/series/${comic.id}/comics`).then((response) => response.data.data.results)
-          
-    //       );
+        const promises = series.map((comic: any) =>
+          marvelApi.get(`/series/${comic.id}/comics`).then((response) => response.data.data.results)
+          );
   
-    //     const magazines = await Promise.all(promises);
-    //     setListMagazines(magazines.flat());
-    //   setListPaginate(listMagazines.slice(0, 20));
-    //   } catch (error) {
-    //     console.log("Erro: ", error);
-    //   }
-    // console.log(listMagazines)
-    // }
-    // fetchComics();
-    setListMagazines(arrayComics);
-    setListPaginate(listMagazines.slice(0, 20));
-    Paginate(page);
-  }, [listPaginate]);
+        const magazines = await Promise.all(promises);
+        setListMagazines(magazines.flat());
+        setListPaginate(listMagazines.slice(0, 20));
+      } catch (error) {
+        setListMagazines(arrayComics)
+        setListPaginate(listMagazines.slice(0, 20)); 
+      }
+    }
+    fetchComics();
+  }, []);
 
+  const listPaginateRef = useRef([]);
+
+  useEffect(() => {
+    if (JSON.stringify(listPaginate[0]) === JSON.stringify(listPaginateRef.current)[0]) {
+      return;
+    }
+    
+    setListPaginate(listPaginate);
+    listPaginateRef.current = listPaginate;
+    page && Paginate(Number(page)),
+    [page]})
 
   return (
     
@@ -79,21 +99,19 @@ function Home() {
       <Header />
         <h1>Destaques</h1>
         <S.UlComics>
-          {listPaginate.map((comic: any, index: any) => <Card comic={comic} key={index} />
+          {listPaginate.map((comic: Card, index: number) => <Card comic={comic} key={index} />
           )}
         </S.UlComics>
 
         <S.ButtonsPage className='buttons-page'>
-
           <a onClick={() => {
-           const next = Number(page) > 1 ?  Number(page) - 1 : 1;
-           history.push(`${ next }`)
-           history.push(`${(page - 1) | 1}`)
+            const previous = Number(page) > 1 ? Number(page) - 1 : 1;
+            history.push(`${previous}`);
           }}>
-            Previus
+            Previous
           </a>
           {
-            listMagazines?.map((item: any | never, index: number) =>{
+            listMagazines?.map((item: Card, index: number) =>{
                 if(index <= (listMagazines.length / 20)){
                   return(
                   <a  onClick={() => { 
@@ -106,17 +124,14 @@ function Home() {
           }
 
         <a onClick={() => {
-          const next = Number(page) <  listMagazines.length / 20 ? Number(page) + 1 : page;
+          const next = Number(page) <  listMagazines.length / 20 ? Number(page) + 1 : Math.ceil(listMagazines.length / 20);
           history.push(`${ next }`)
       }}>
           Next  
         </a>
         </S.ButtonsPage>
       </S.HomePageStyled>
-      
-    
-
   )
 }
 
-export default Home
+export {Home};
