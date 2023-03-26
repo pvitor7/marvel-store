@@ -1,15 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
-import 'typeface-open-sans';
-
 
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    font-family: "Open-Sans", sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
+    ::-webkit-scrollbar {
+  display: none;
+}
   }
-
+  
+  
   :root{
     --color-white-fixed: #FFFFFF;
     --color-black-fixed: #000000;
