@@ -10,7 +10,7 @@ export default defineConfig({
 
   e2e: {
     setupNodeEvents(on, config) {
-        baseUrl: "http://localhost:5173"
+        baseUrl: "http://localhost:3000"
     },
   },
 });
