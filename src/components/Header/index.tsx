@@ -18,7 +18,8 @@ const Header = () => {
                 <BsFillCartFill onClick={() => cart ? setCart(false): setCart(true)} className='icon-cart'/>
         </S.HeaderStyled>
 
-        {cart && <Cart />}
+
+        {cart && <Cart/>}
         </>
 
     )

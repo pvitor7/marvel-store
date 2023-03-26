@@ -13,15 +13,41 @@ export const HeaderStyled = styled.header`
     color: #000000;
     box-shadow: 0px 4px 30px -10px rgba(0, 0, 0, 0.25);
     z-index: 100;
-    background:  var(--color-black-fixed);
-    background-image: url(public/Marvel-Wallpaper.jpg);
-    background-position: center;
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
+
+    &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background:  var(--color-black-fixed);
+            background-image: url(public/16027_download-wallpapers-3840x2160-marvel-comics-the-avengers_3840x2160_h.jpg);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(0.5px);
+
+            }
+
 
     img{
         height: 90%;
         margin: 10px;
+
+        :hover {
+            transform: scale(1.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        :not(:hover) {
+            transform: scale(1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            }
     }
 
     .icon-cart{
@@ -31,7 +57,17 @@ export const HeaderStyled = styled.header`
         color: var(--color-white-fixed);
         padding: 5px;
         background: var(--color-black-fixed);
-        border-radius: 50%;
+        border-radius: 5px;
+
+        :hover {
+            transform: scale(1.2);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        :not(:hover) {
+            transform: scale(1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            }
     }
     
 
