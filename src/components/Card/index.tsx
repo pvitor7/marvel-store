@@ -1,10 +1,24 @@
 import * as S from "./styled";
 import { useHistory } from "react-router-dom";
 import { addToCart, getCart } from "../../utils/cart";
+import { IPrice } from "../../pages/ComicPage";
 
+export interface ICardProps {
+  comic: {
+    id: number;
+    title: string;
+    thumbnail: {
+      path: string;
+      extension: string;
+    };
+    prices?: {
+      type: string;
+      price: number;
+    }[];
+  };
+}
 
-
-const Card = ({comic}: any) => {
+const Card = ({comic}: ICardProps) => {
 
 const history = useHistory();
 
@@ -15,7 +29,7 @@ const history = useHistory();
               <h3 className="title-card"  onClick={()=> history.push(`/comic/${comic.id}`)}>{comic.title}</h3>
 
               <S.DivPrice>
-                      {comic.prices?.map((price: any, index: number) => 
+                      {comic.prices?.map((price: IPrice, index: number) => 
                       <S.Price key={index}   className="buy-button"               
                       onClick={() => {
                         addToCart({ 
@@ -34,4 +48,4 @@ const history = useHistory();
     )
 }
 
-export default Card;
+export {Card};

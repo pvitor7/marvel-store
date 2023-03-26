@@ -18,13 +18,24 @@ export const CardStyled = styled.div`
         font-size: 18px;
         max-width: 100%;
         height: 50px;
+
+        :hover {
+            transform: scale(1.01);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            color: var(--color-red);
+            text-decoration: underline;
+
+        }
+
+
+        :not(:hover) {
+            transform: scale(1);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+
     }
     
-    h3:hover{
-        color: red;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
 
     img{
         width: 132px;
