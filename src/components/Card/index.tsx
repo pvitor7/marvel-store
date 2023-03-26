@@ -8,7 +8,6 @@ const Card = ({comic}: any) => {
 
 const history = useHistory();
 
-
     return(
         <S.CardStyled >
               <img className="img-card"  onClick={()=> history.push(`/comic/${comic.id}`)} src={
