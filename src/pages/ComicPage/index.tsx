@@ -34,7 +34,7 @@ interface ICreators {
 function ComicPage() {
 
   const { id }: RouteParams = useParams();
-  const [comic, setComics] = useState<IComic>();
+  const [comic, setComics] = useState<IComic | IComicRequest>();
   const [selectedComic, setSelectedComic] = useState<IComicRequest>();
 
   useEffect(() => {
@@ -48,16 +48,10 @@ function ComicPage() {
         if (!selectedComic.description) {
           selectedComic.description = " ";
         }
-        setSelectedComic(selectedComic);
+        setComics(selectedComic);
       })
   }, []);
 
-  // useEffect(() => {
-  //   if (comic.length > 0) {
-
-  //     setSelectedComic(comic[0]);
-  //   }
-  // }, [comic]);
 
   return (
 

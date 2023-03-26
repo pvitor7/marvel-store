@@ -76,9 +76,8 @@ function Home() {
         setListPaginate(listMagazines.slice(0, 20));
       } catch (error) {
         
-        const list = listMagazines.slice(0, 20).map(item => ({ ...item, description: item.description || '' }));
+        const list = arrayComics.slice(0, 20).map(item => ({ ...item, description: item.description || '' }));
         setListPaginate(list);
-        // setListPaginate(arrayComics.slice(0, 20)); 
       }
     }
     fetchComics();
