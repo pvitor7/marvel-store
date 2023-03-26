@@ -3,7 +3,7 @@ import Header from '../../components/Header';
 import marvelApi from '../../server';
 import { useEffect, useRef, useState } from 'react';
 import { Card } from '../../components/Card';
-import { arrayComics } from '../../utils/arrayComics';
+import { IComicRequest, arrayComics } from '../../utils/arrayComics';
 import { useHistory, useParams } from 'react-router-dom';
 
 export interface RouteParams {
@@ -26,9 +26,9 @@ interface Card{
 
 function Home() {
 
-  const [listMagazines, setListMagazines] = useState([]);
+  const [listMagazines, setListMagazines] = useState<IComicRequest[]>([]);
   const [count, setCount] = useState(1);
-  const [listPaginate, setListPaginate] = useState([]);
+  const [listPaginate, setListPaginate] = useState<IComicRequest[]>([]);
   const history = useHistory();
   const { page }: RouteParams = useParams();
 
@@ -67,7 +67,7 @@ function Home() {
         const response = await marvelApi.get("series");
         const series = response.data.data.results;
         
-        const promises = series.map((comic: any) =>
+        const promises = series.map((comic: IComicRequest) =>
           marvelApi.get(`/series/${comic.id}/comics`).then((response) => response.data.data.results)
           );
   
@@ -75,13 +75,16 @@ function Home() {
         setListMagazines(magazines.flat());
         setListPaginate(listMagazines.slice(0, 20));
       } catch (error) {
-        setListPaginate(arrayComics.slice(0, 20)); 
+        
+        const list = listMagazines.slice(0, 20).map(item => ({ ...item, description: item.description || '' }));
+        setListPaginate(list);
+        // setListPaginate(arrayComics.slice(0, 20)); 
       }
     }
     fetchComics();
   }, []);
 
-  const listPaginateRef = useRef([]);
+  const listPaginateRef = useRef<IComicRequest[]>([]);
 
   useEffect(() => {
     if (JSON.stringify(listPaginate[0]) === JSON.stringify(listPaginateRef.current)[0]) {

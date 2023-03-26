@@ -5,50 +5,59 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../../utils/cart';
 import { RouteParams } from '../Home';
-import { arrayComics } from '../../utils/arrayComics';
+import { IComicRequest, arrayComics, comicEmpty } from '../../utils/arrayComics';
 
-export interface IPrice{
-  type: string, 
-  price: number
+export interface IPrice {
+  type: string;
+  price: number;
 }
 
 interface IComic {
-  id: number;
+  id: number; 
   title: string;
-  thumbnail: {
-    path: string;
-    extension: string;
-  };
-  creators: {
-    items: {
-      name: string;
-      role: string;
-    }[];
-  };
-  pageCount: number;
+  type: string;
+  price: number;
+  img: string;
+  quantity: number;
+  creators: {items: ICreators[]};
+  thumbnail: {extension: string, path: string}
+  pageCount: string;
   description: string;
-  prices: {
-    type: string;
-    price: number;
-  }[];
+  prices: IPrice[];
 }
 
-interface ICreators{
-    name: string;
-    role: string;
+interface ICreators {
+  name: string;
+  role: string;
 }
 
 function ComicPage() {
 
   const { id }: RouteParams = useParams();
-  const [comic, setComic]: [IComic | undefined, (value: IComic) => void] = useState();
+  const [comic, setComics] = useState<IComic>();
+  const [selectedComic, setSelectedComic] = useState<IComicRequest>();
 
   useEffect(() => {
     marvelApi
       .get(`comics/${id}`)
-      .then((response) => setComic(response.data.data.results[0]))
-      .catch((err) => setComic(arrayComics.find((comic: any) => comic.id == id)))
+      .then((response) => {
+        setComics(response.data.data.results[0])
+      })
+      .catch((err) => {
+        const selectedComic = arrayComics.find((c) => Number(id) === c.id) as IComicRequest;
+        if (!selectedComic.description) {
+          selectedComic.description = " ";
+        }
+        setSelectedComic(selectedComic);
+      })
   }, []);
+
+  // useEffect(() => {
+  //   if (comic.length > 0) {
+
+  //     setSelectedComic(comic[0]);
+  //   }
+  // }, [comic]);
 
   return (
 
@@ -70,7 +79,7 @@ function ComicPage() {
             comic?.prices.map((price: IPrice) =>
               <S.Price
                 onClick={() => {
-                  addToCart({ id: comic.id, title: comic.title, type: price.type, price: price.price, img: `${comic.thumbnail.path}.${comic.thumbnail.extension}`});
+                  addToCart({ id: comic?.id, title: comic?.title, type: price.type, price: price.price, img: `${comic?.thumbnail.path}.${comic?.thumbnail.extension}`, quantity: 1 });
                 }}
               >
                 {price.type === "printPrice" ? "Impressa: " : "Digital: "}
