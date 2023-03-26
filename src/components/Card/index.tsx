@@ -18,7 +18,7 @@ export interface ICardProps {
   };
 }
 
-const Card = ({comic}: ICardProps) => {
+export const Card = ({comic}: ICardProps) => {
 
 const history = useHistory();
 
@@ -32,13 +32,8 @@ const history = useHistory();
                       {comic.prices?.map((price: IPrice, index: number) => 
                       <S.Price key={index}   className="buy-button"               
                       onClick={() => {
-                        addToCart({ 
-                          id: comic.id, 
-                          title: comic.title, 
-                          type: price.type, 
-                          price: price.price, 
-                          img: `${comic.thumbnail.path}.${comic.thumbnail.extension}`
-                        });
+                        addToCart({ id: comic.id, title: comic.title, type: price.type, price: price.price, img: `${comic.thumbnail.path}.${comic.thumbnail.extension}`, quantity: 1 });
+                        ;
                       }}
 
                       >{price.type === "printPrice" ? "Impresso: " :  "Digital: " } {price.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} </S.Price>
@@ -48,4 +43,3 @@ const history = useHistory();
     )
 }
 
-export {Card};

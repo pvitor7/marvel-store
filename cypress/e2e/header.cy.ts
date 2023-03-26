@@ -12,5 +12,6 @@ describe('Header spec', () => {
     cy.get('img:first').click()
     cy.url().should('equal', 'http://localhost:3000/')
   })
-
 })
+
+export {};

@@ -16,3 +16,5 @@ describe('ComicPage', () => {
     // cy.get('.cart-item').should('contain', '$3.99');
   });
 });
+
+export {};

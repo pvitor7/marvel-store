@@ -22,3 +22,5 @@ describe('Teste do Card', () => {
 
   });
 })
+
+export {};

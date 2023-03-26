@@ -9,3 +9,5 @@ describe('Test pagination', () => {
     // cy.url().should('include', '/page/3'); // Verifies that the URL changed back to page 3
     })
 })
+
+export {};

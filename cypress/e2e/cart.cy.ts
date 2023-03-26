@@ -38,3 +38,5 @@ describe('Teste do Cart', () => {
       });
 
 });
+
+export {};
