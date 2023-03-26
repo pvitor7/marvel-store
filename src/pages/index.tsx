@@ -7,8 +7,8 @@ function Routes() {
 
     return (
         <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/comic/:id" component={ComicPage} />
+            <Route exact path="/comic/:id" component={ComicPage} />
+            <Route path="/:page?" component={Home} />
         </Switch>
     )
 }
