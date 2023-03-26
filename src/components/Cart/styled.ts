@@ -76,17 +76,20 @@ export const CartStyled = styled.div`
             justify-content: center;
             font-size: 20px;
             align-items: center;
-            background-color: var(--color-green1);
             color: var(--color-white-fixed);
             width: 95%;
             height: 50px;
             border-radius: 5px;
+        }
+
+        .cart-total-price{
+            border: solid 2px var(--color-green1);
+            background-color: var(--color-green1);
 
         :hover {
             transform: scale(1.02);
             transition: background-color 0.3s ease, transform 0.3s ease;
-            box-shadow: 0 0 1px 2px var(--color-green1);
-
+            color: var(--color-white-fixed);
         }
 
 
@@ -94,7 +97,14 @@ export const CartStyled = styled.div`
             transform: scale(1);
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
+
         }
+
+        .cart-total-quantity{
+            background-color: var(--color-black-fixed);
+        }
+
+
 
 }
 `
@@ -131,6 +141,7 @@ export const TrStyled = styled.tr`
         color: var(--color-white-fixed);
         font-size: 20px;
         border-radius: 3px;
+            
     }
 
     td > img{

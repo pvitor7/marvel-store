@@ -2,11 +2,13 @@ import * as S from './styled';
 import { useEffect, useState } from "react";
 import { addToCart, getCart, removeFromCart } from "../../utils/cart";
 
-interface CartItem {
+export interface ICartItem {
     id: number;
     title: string;
     price: number;
     quantity: number;
+    img: string;
+    type: string;
   };
 
 const Cart = () => {
@@ -17,22 +19,25 @@ const Cart = () => {
       setCartItems(cart);
     }, []);
   
-    const handleAddToCart = (item: CartItem) => {
+    const handleAddToCart = (item: ICartItem) => {
       addToCart(item);
-      setCartItems(getCart());
+      const cart = getCart();
+      setCartItems(cart);
     };
   
-    const handleRemoveFromCart = (item: CartItem) => {
-      removeFromCart(item);
-      setCartItems(getCart());
+    const handleRemoveFromCart = (item: ICartItem) => {
+      removeFromCart(item.id);
+      const cart = getCart();
+      setCartItems(cart);
     };
   
-    const total = cartItems.reduce((acc, item: CartItem) => acc + item.price * item.quantity, 0);
-  
+    const total = cartItems.reduce((acc, item: ICartItem) => acc + item.price * item.quantity, 0);
+    const quantity = cartItems.reduce((acc, item: ICartItem) => acc + item.quantity, 0);
+
     return (
       
       <S.CartStyled id="cart">
-        <h2>Carrinho de Compras</h2>
+        <h2 className='title-cart'>Carrinho de Compras</h2>
         {cartItems.length === 0 ? (
           <p>Carrinho vazio.</p>
         ) : (
@@ -40,10 +45,11 @@ const Cart = () => {
             <table>
               <tbody>
                 {
-              cartItems.map((item: any) => (                
-                <S.TrStyled id={item.id}>
+              cartItems.map((item: ICartItem) => (                
+                <S.TrStyled key={item.id}>
                   <td><img src={item.img} className="cart-card-img" /> </td> 
                   <td>{item.type === "printPrice" ? "Impressa" :  "Digital" }</td>
+                  <td className='cart-item-price'> {item.price}</td>
                   <td className='quantity'>
                     {item.quantity}
                     <div>
@@ -56,11 +62,12 @@ const Cart = () => {
               }
               </tbody>
             </table>
-            <p>Total: R$ {total.toFixed(2)}</p>
+            <p className='cart-total-quantity'>Quantidade: {quantity}</p>
+            <p className='cart-total-price'>Total: R$ {total.toFixed(2)}</p>
           </>
         )}
       </S.CartStyled>
     );
   };
 
-  export default Cart;
+  export { Cart };
