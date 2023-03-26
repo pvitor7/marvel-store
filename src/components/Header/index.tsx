@@ -1,7 +1,7 @@
 import * as S from './styled';
 import Logo from '../../../public/marvel-comics-logo.png';
 import { BsFillCartFill } from 'react-icons/bs'
-import Cart from '../Cart';
+import { Cart } from '../Cart';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
