@@ -4,28 +4,34 @@ import marvelApi from '../../server';
 import { useEffect, useState } from 'react';
 import Card from '../../components/Card';
 import { arrayComics } from '../../utils/arrayComics';
+import { useHistory, useParams } from 'react-router-dom';
+
 
 
 function Home() {
 
-  const [listMagazines, setListMagazines] = useState([]);
+  const [listMagazines, setListMagazines]: any[] = useState([]);
   const [count, setCount] = useState(1);
   const [listPaginate, setListPaginate] = useState([]);
+  const history = useHistory();
+  const { page }: any = useParams();
 
-  const Paginate = (value: any) => {
+
+
+  const Paginate = (value: number | string) => {
     
     let start, end;
     const totalItems = listMagazines.length;
     const maxEnd = Math.min(totalItems, 20);
   
-    if (value === 1) {
+    if (Number(value) === 1) {
       start = 0;
       end = maxEnd;
-      setCount(value);
-    } else if (value > 1) {
-      start = (value - 1) * 20;
+      setCount(Number(value));
+    } else if (Number(value) > 1) {
+      start = (Number(value) - 1) * 20;
       end = Math.min(start + 20, totalItems);
-      setCount(value);
+      setCount(Number(value));
     } else if (value === "Next") {
       start = count * 20;
       end = Math.min(start + 20, totalItems);
@@ -63,13 +69,14 @@ function Home() {
     // fetchComics();
     setListMagazines(arrayComics);
     setListPaginate(listMagazines.slice(0, 20));
-  }, [listMagazines]);
+    Paginate(page);
+  }, [listPaginate]);
 
 
   return (
-    <>
-      <Header />
+    
       <S.HomePageStyled>
+      <Header />
         <h1>Destaques</h1>
         <S.UlComics>
           {listPaginate.map((comic: any, index: any) => <Card comic={comic} key={index} />
@@ -78,27 +85,36 @@ function Home() {
 
         <S.ButtonsPage className='buttons-page'>
 
-          <a onClick={() => Paginate("Previus")}>
+          <a onClick={() => {
+           const next = Number(page) > 1 ?  Number(page) - 1 : 1;
+           history.push(`${ next }`)
+           history.push(`${(page - 1) | 1}`)
+          }}>
             Previus
           </a>
           {
             listMagazines?.map((item: any | never, index: number) =>{
                 if(index <= (listMagazines.length / 20)){
                   return(
-                  <a  onClick={() => Paginate(index + 1)}>
+                  <a  onClick={() => { 
+                    history.push(`${index + 1}`)
+                    }}>
                           {index + 1}
                   </a>)
                 }
             })
           }
 
-        <a onClick={() => Paginate("Next")}>
+        <a onClick={() => {
+          const next = Number(page) <  listMagazines.length / 20 ? Number(page) + 1 : page;
+          history.push(`${ next }`)
+      }}>
           Next  
         </a>
         </S.ButtonsPage>
       </S.HomePageStyled>
       
-    </>
+    
 
   )
 }

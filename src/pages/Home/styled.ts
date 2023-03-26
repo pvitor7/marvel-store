@@ -5,7 +5,7 @@ export const HomePageStyled = styled.body`
         display: flex;
         flex-direction: column;
         width: 100vw;
-        /* height: 85vh; */
+        height: 100vh;
         top:  80px;
         position: relative;
         align-items: center;
@@ -18,7 +18,7 @@ export const HomePageStyled = styled.body`
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url("../../../public/hqs.jpg");
+            background-image: url(public/hqs.jpg);
             filter: blur(4px);
             }
         
@@ -27,8 +27,8 @@ export const HomePageStyled = styled.body`
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
-            padding: 30px 0px;
+            font-size: 30px;
+            padding: 40px 0px 20px 0px;
             width: 100%;
             color: var(--color-white-fixed);
             background: var(--color-black-fixed);
@@ -43,13 +43,12 @@ export const UlComics = styled.ul`
     flex-wrap: wrap;
     width: 100vw;
     max-width: 1440px;
-    height: 100%;
+    height: 80%;
     gap: 50px;
     justify-content: center;
-    padding: 20px 20px;
+    padding: 20px 20px 150px 20px;
     border-radius: 5px;
     overflow-y: auto;
-    /* background: var(--color-black-fixed); */
     
     ::-webkit-scrollbar {
         width: 10px;
@@ -74,12 +73,17 @@ export const ButtonsPage = styled.div`
     justify-content: center;
     width: 100vw;
     background: var(--color-black-fixed);
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+
     a{
         border: none;
         background: var(--color-black-fixed);
         color: var(--color-white-fixed);
         font-size: 20px;
-        padding: 5px;
+        padding: 10px;
         border-radius: 3px;
 
         :hover {
