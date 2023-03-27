@@ -33,54 +33,58 @@ function Home() {
   const { page }: RouteParams = useParams();
 
   const Paginate = (value: number | string) => {
+    
     let start, end;
     const totalItems = listMagazines.length;
-    const maxEnd = Math.min(totalItems, 20);
   
+    if (Number(value) < 1) {
+      value = 1;
+    }
+
     if (Number(value) === 1) {
       start = 0;
-      end = maxEnd;
-      setCount(Number(value));
+      end = start + 20;
+
     } else if (Number(value) > 1) {
-      start = (Number(value) - 1) * 20;
-      end = Math.min(start + 20, totalItems);
-      setCount(Number(value));
+      end = (Number(value) * 20) - 1;
+      start =  end - 20;
+
     } else if (value === "Next") {
-      start = count * 20;
-      end = Math.min(start + 20, totalItems);
-      setCount(count + 1);
+      start = (Number(page) + 1) * 20;
+      end = start + 20;
     } else if (value === "Previous") {
-      start = (count - 2) * 20;
-      end = Math.min(start + 20, totalItems);
-      setCount(count - 1);
+      start = (Number(page) - 1) * 20;
+      end = start + 20;
     }
-  
+
     const list = listMagazines.slice(start, end);
     setListPaginate(list);
   }
   
-
-  useEffect(() => {
-    
+useEffect(() => {
+   
     async function fetchComics() {
       try {
         const response = await marvelApi.get("series");
         const series = response.data.data.results;
-        
         const promises = series.map((comic: IComicRequest) =>
           marvelApi.get(`/series/${comic.id}/comics`).then((response) => response.data.data.results)
           );
   
         const magazines = await Promise.all(promises);
         setListMagazines(magazines.flat());
-        setListPaginate(listMagazines.slice(0, 20));
+        const param = page ? Number(page) : 1;
+        Paginate(param);
       } catch (error) {
         
-        const list = arrayComics.slice(0, 20).map(item => ({ ...item, description: item.description || '' }));
-        setListPaginate(list);
+        const list = arrayComics.map(item => ({ ...item, description: item.description || '' }));
+        setListMagazines(list);
+        const param = page ? Number(page) : 1;
+        Paginate(param);
       }
     }
     fetchComics();
+
   }, []);
 
   const listPaginateRef = useRef<IComicRequest[]>([]);
@@ -90,11 +94,11 @@ function Home() {
       return;
     }
     
-    setListPaginate(listPaginate);
-    listPaginateRef.current = listPaginate;
-    page && Paginate(Number(page)),
-    [page]})
-
+    const param = page ? Number(page) : 1;
+    Paginate(Number(param))}, 
+    [listMagazines])
+  
+  
   return (
     
       <S.HomePageStyled>
@@ -113,10 +117,10 @@ function Home() {
             Previous
           </a>
           {
-            listMagazines?.map((item: Card, index: number) =>{
+            listMagazines?.map((item, index: number) =>{
                 if(index <= (listMagazines.length / 20)){
                   return(
-                  <a  onClick={() => { 
+                  <a  key={index}  onClick={() => { 
                     history.push(`${index + 1}`)
                     }}>
                           {index + 1}
