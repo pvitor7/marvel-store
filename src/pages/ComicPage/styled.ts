@@ -23,7 +23,7 @@ export const ComicPage = styled.body`
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url("../../../public/hqs.jpg");
+            background-image: url("../../public/hqs.jpg");
             filter: blur(4px);
             }
 

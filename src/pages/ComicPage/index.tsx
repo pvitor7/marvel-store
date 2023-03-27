@@ -45,7 +45,6 @@ function ComicPage() {
       })
       .catch((err) => {
         const selectedComic = arrayComics.find((c) => Number(id) === c.id) as IComicRequest;
-        console.log(selectedComic);
         
         if (!selectedComic.description) {
           selectedComic.description = " ";

@@ -31,9 +31,7 @@ export const HeaderStyled = styled.header`
             background-position: center;
             background-repeat: no-repeat;
             filter: blur(0.5px);
-
             }
-
 
     img{
         height: 90%;

@@ -27,7 +27,6 @@ interface Card{
 function Home() {
 
   const [listMagazines, setListMagazines] = useState<IComicRequest[]>([]);
-  const [count, setCount] = useState(1);
   const [listPaginate, setListPaginate] = useState<IComicRequest[]>([]);
   const history = useHistory();
   const { page }: RouteParams = useParams();
