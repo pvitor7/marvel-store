@@ -15,6 +15,19 @@ export const ComicPage = styled.body`
         box-sizing: border-box;
         overflow-y: auto;
 
+        h1{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            padding: 30px 0px 20px 0px;
+            width: 100%;
+            color: var(--color-white-fixed);
+            background: var(--color-black-fixed);
+            position: fixed;
+            z-index: 1;
+        }
+
         &::before {
             content: "";
             position: absolute;
@@ -23,7 +36,7 @@ export const ComicPage = styled.body`
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url("../../public/hqs.jpg");
+            background-image: url("https://i.pinimg.com/originals/f7/5f/e9/f75fe9d6f289c1f3b5382f832ff35477.jpg");
             filter: blur(4px);
             }
 
@@ -54,7 +67,7 @@ export const Comic = styled.div`
     @media (min-width: 120px) {
         width: 80%;
         max-width: 580px;
-        margin-top: 20px;
+        margin-top: 100px;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -59,8 +59,8 @@ function ComicPage() {
     <S.ComicPage>
       <Header />
 
+      <h1>{comic?.title}</h1>
       <S.Comic>
-        <h2>{comic?.title}</h2>
         <img src={`${comic?.thumbnail.path}.${comic?.thumbnail.extension}`} alt={comic?.title} />
         {comic?.creators?.items.map((creator: ICreators) => <p> <span>{creator.role}: </span>{creator.name}</p>)}
         <p> <span>Páginas:</span> {comic?.pageCount}</p>

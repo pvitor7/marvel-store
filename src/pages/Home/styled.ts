@@ -18,7 +18,7 @@ export const HomePageStyled = styled.body`
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url("../../public/hqs.jpg");
+            background-image: url("https://i.pinimg.com/originals/f7/5f/e9/f75fe9d6f289c1f3b5382f832ff35477.jpg");
             filter: blur(4px);
             }
         

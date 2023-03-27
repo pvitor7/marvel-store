@@ -26,9 +26,9 @@ export const HeaderStyled = styled.header`
             height: 100%;
             z-index: -1;
             background:  var(--color-black-fixed);
-            background-image: url("public/16027_download-wallpapers-3840x2160-marvel-comics-the-avengers_3840x2160_h.jpg");
+            background-image: url("https://i.pinimg.com/originals/32/be/15/32be1563e5c5f8c2e802142ea92ec6db.jpg");
             background-size: cover;
-            background-position: center;
+            background-position: center top;
             background-repeat: no-repeat;
             filter: blur(0.5px);
             }
