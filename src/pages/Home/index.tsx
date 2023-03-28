@@ -3,26 +3,11 @@ import Header from '../../components/Header';
 import marvelApi from '../../server';
 import { useEffect, useRef, useState } from 'react';
 import { Card } from '../../components/Card';
-import { IComicRequest, arrayComics } from '../../utils/arrayComics';
+import { arrayComics } from '../../utils/arrayComics';
 import { useHistory, useParams } from 'react-router-dom';
-
-export interface RouteParams {
-  page: string;
-  id: string;
-}
-
-interface Card{
-    id: number;
-    title: string;
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-    prices?: {
-      type: string;
-      price: number;
-    }[];
-}
+import { ICard } from '../../types/card.types';
+import { IComicRequest } from '../../types/comic.types';
+import { RouteParams } from '../../types/hooks.types';
 
 function Home() {
 
@@ -104,7 +89,7 @@ useEffect(() => {
       <Header />
         <h1>Destaques</h1>
         <S.UlComics>
-          {listPaginate.map((comic: Card, index: number) => <Card comic={comic} key={index} />
+          {listPaginate.map((comic: ICard, index: number) => <Card comic={comic} key={index} />
           )}
         </S.UlComics>
 

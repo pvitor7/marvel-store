@@ -1,22 +1,8 @@
 import * as S from "./styled";
 import { useHistory } from "react-router-dom";
-import { addToCart, getCart } from "../../utils/cart";
-import { IPrice } from "../../pages/ComicPage";
-
-export interface ICardProps {
-  comic: {
-    id: number;
-    title: string;
-    thumbnail: {
-      path: string;
-      extension: string;
-    };
-    prices?: {
-      type: string;
-      price: number;
-    }[];
-  };
-}
+import { addToCart } from "../../utils/cart";
+import { ICardProps } from "../../types/card.types";
+import { IPrice } from "../../types/comic.types";
 
 export const Card = ({comic}: ICardProps) => {
 

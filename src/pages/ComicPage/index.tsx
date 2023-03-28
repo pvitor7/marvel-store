@@ -4,37 +4,15 @@ import marvelApi from '../../server';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { addToCart } from '../../utils/cart';
-import { RouteParams } from '../Home';
-import { IComicRequest, arrayComics, comicEmpty } from '../../utils/arrayComics';
+import { arrayComics } from '../../utils/arrayComics';
+import { IComicRequest, ICreators, IPrice } from '../../types/comic.types';
+import { RouteParams } from '../../types/hooks.types';
 
-export interface IPrice {
-  type: string;
-  price: number;
-}
-
-interface IComic {
-  id: number; 
-  title: string;
-  type: string;
-  price: number;
-  img: string;
-  quantity: number;
-  creators: {items: ICreators[]};
-  thumbnail: {extension: string, path: string}
-  pageCount: string;
-  description: string;
-  prices: IPrice[];
-}
-
-interface ICreators {
-  name: string;
-  role: string;
-}
 
 function ComicPage() {
 
   const { id }: RouteParams = useParams();
-  const [comic, setComics] = useState<IComic | IComicRequest>();
+  const [comic, setComics] = useState<IComicRequest | IComicRequest>();
   const [selectedComic, setSelectedComic] = useState<IComicRequest>();
 
   useEffect(() => {

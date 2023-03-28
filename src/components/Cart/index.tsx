@@ -1,15 +1,8 @@
 import * as S from './styled';
 import { useEffect, useState } from "react";
 import { addToCart, getCart, removeFromCart } from "../../utils/cart";
+import { ICartItem } from '../../types/cart.types';
 
-export interface ICartItem {
-    id: number;
-    title: string;
-    price: number;
-    quantity: number;
-    img: string;
-    type: string;
-  };
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
